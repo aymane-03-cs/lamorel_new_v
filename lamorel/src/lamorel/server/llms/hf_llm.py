@@ -24,6 +24,7 @@ class HF_LLM(BaseLLM):
     def __init__(self, args, devices, use_cpu):
         super().__init__(args, devices, use_cpu)
         print("Parallelising HF LLM on {} devices".format(len(self.devices)))
+        print(f"Loading model with dtype {args.dtype}")
         # Load model and tokenizer
         self._LLM_tokenizer, _model_constructor, num_layers = load_hf_model_and_tokenizer(
             args.model_type, args.model_path,args.pretrained, args.dtype )

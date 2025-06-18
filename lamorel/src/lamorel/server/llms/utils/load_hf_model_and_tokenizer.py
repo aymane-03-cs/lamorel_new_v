@@ -12,7 +12,7 @@ class ModelTypesEnum(Enum):
     seq2seq = AutoModelForSeq2SeqLM
 
 
-def load_hf_model_and_tokenizer(type, path, pretrained, dtype="float32"):
+def load_hf_model_and_tokenizer(model_type, path, pretrained, dtype="float32"):
     
     def string_to_dtype(dtype_str, default="float32"):
         """
@@ -35,10 +35,12 @@ def load_hf_model_and_tokenizer(type, path, pretrained, dtype="float32"):
         n_layers_key = config.attribute_map[n_layers_key]
 
     n_layers = getattr(config, n_layers_key)
-    model_class = ModelTypesEnum[type].value
+    model_class = ModelTypesEnum[model_type].value
 
     #get dtype according to dtype:str
     loading_torch_dtype =  string_to_dtype(dtype)
+
+    print(f"loading model with dtype {loading_torch_dtype}")
     if pretrained:
         model_method = lambda **kwargs: model_class.from_pretrained(path,torch_dtype=loading_torch_dtype, **kwargs)
     else:

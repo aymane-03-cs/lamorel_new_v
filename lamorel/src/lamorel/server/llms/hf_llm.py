@@ -26,7 +26,7 @@ class HF_LLM(BaseLLM):
         print("Parallelising HF LLM on {} devices".format(len(self.devices)))
         # Load model and tokenizer
         self._LLM_tokenizer, _model_constructor, num_layers = load_hf_model_and_tokenizer(
-            args.model_type, args.model_path, args.pretrained)
+            args.model_type, args.model_path,args.pretrained, args.dtype )
 
         constructor_kwargs = {
             "trust_remote_code": True

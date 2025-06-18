@@ -11,6 +11,7 @@ lamorel_args:
     num_machines: 1
   llm_args:
     model_type: seq2seq
+    dtype : float32
     model_path: t5-small
     pretrained: true
     minibatch_size: 192
